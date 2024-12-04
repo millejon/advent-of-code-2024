@@ -25,10 +25,21 @@ def calculate_distance(list1: list, list2: list) -> int:
     return distance
 
 
+def calculate_similarity(list1: list, list2: list) -> int:
+    similarity = 0
+
+    for number in list1:
+        similarity += number * list2.count(number)
+
+    return similarity
+
+
 def compare_lists(list1: list, list2: list) -> None:
     distance = calculate_distance(list1, list2)
+    similarity = calculate_similarity(list1, list2)
 
     print(f"Total distance is {distance}.")
+    print(f"Similarity score is {similarity}.")
 
 
 if __name__ == "__main__":
