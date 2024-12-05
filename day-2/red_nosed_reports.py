@@ -10,6 +10,12 @@ def is_report_safe(report: list[int]) -> bool:
     return (increasing or decreasing) and gradual_movement
 
 
+def is_report_safe_after_problem_dampener(report: list[int]) -> bool:
+    dampened_reports = [report[:x] + report[x+1:] for x, level in enumerate(report)]
+
+    return any(is_report_safe(report) for report in dampened_reports)
+
+
 def count_safe_reports(data: str) -> None:
     safe_reports = 0
 
@@ -17,6 +23,8 @@ def count_safe_reports(data: str) -> None:
         for report in input:
             report = [int(level) for level in report.split()]
             if is_report_safe(report):
+                safe_reports += 1
+            elif is_report_safe_after_problem_dampener(report):
                 safe_reports += 1
 
     print(f"There are {safe_reports} safe reports.")
