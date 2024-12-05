@@ -22,9 +22,7 @@ def count_safe_reports(data: str) -> None:
     with open(data, encoding="utf-8") as input:
         for report in input:
             report = [int(level) for level in report.split()]
-            if is_report_safe(report):
-                safe_reports += 1
-            elif is_report_safe_after_problem_dampener(report):
+            if is_report_safe(report) or is_report_safe_after_problem_dampener(report):
                 safe_reports += 1
 
     print(f"There are {safe_reports} safe reports.")
